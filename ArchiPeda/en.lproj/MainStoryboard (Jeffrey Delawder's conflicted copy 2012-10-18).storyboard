@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2840" systemVersion="11G63" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2840" systemVersion="11G56" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="5">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1926"/>
     </dependencies>
@@ -8,13 +8,11 @@
         <scene sceneID="14">
             <objects>
                 <navigationController toolbarHidden="NO" id="3" sceneMemberID="viewController">
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackTranslucent" prompted="NO"/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="blackTranslucent"/>
-                    <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" barStyle="blackTranslucent" id="6">
-                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="6">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackTranslucent" id="aPv-gQ-Znk">
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="aPv-gQ-Znk">
                         <rect key="frame" x="0.0" y="724" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
@@ -31,7 +29,7 @@
             <objects>
                 <viewController storyboardIdentifier="" title="Detail" id="4" customClass="DetailViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="200" sectionHeaderHeight="22" sectionFooterHeight="22" id="9st-Dv-1e0">
-                        <rect key="frame" x="0.0" y="20" width="703" height="748"/>
+                        <rect key="frame" x="0.0" y="64" width="703" height="660"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -80,7 +78,7 @@
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Detail" id="53"/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="blackTranslucent"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="selectMultipleButton" destination="490-1t-e5t" id="cSj-zg-GiD"/>
                     </connections>
@@ -94,7 +92,7 @@
             <objects>
                 <viewController id="AmC-Hf-yio" customClass="ImageViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ae0-4m-Uuq">
-                        <rect key="frame" x="0.0" y="20" width="703" height="748"/>
+                        <rect key="frame" x="0.0" y="64" width="703" height="660"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aUe-uA-eqg"/>
@@ -112,7 +110,7 @@
                         <barButtonItem image="18-envelope.png" id="uDF-QS-R1h"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="IbV-Pv-YUQ"/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="blackTranslucent"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="imageScrollView" destination="aUe-uA-eqg" id="rhT-sG-AK1"/>
                     </connections>
@@ -142,7 +140,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="" title="Master" clearsSelectionOnViewWillAppear="NO" id="19" customClass="MasterViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="20">
-                        <rect key="frame" x="0.0" y="20" width="320" height="748"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="660"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -187,7 +185,7 @@
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Browser" id="40"/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="blackTranslucent"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="BackButton" destination="nfq-So-sed" id="9fS-Up-1TN"/>
                     </connections>
@@ -200,13 +198,11 @@
         <scene sceneID="50">
             <objects>
                 <navigationController toolbarHidden="NO" id="42" sceneMemberID="viewController">
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackTranslucent" prompted="NO"/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="blackTranslucent"/>
-                    <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" barStyle="blackTranslucent" id="43">
-                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="43">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackTranslucent" id="cdh-fd-bMp">
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="cdh-fd-bMp">
                         <rect key="frame" x="0.0" y="724" width="703" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>

@@ -12,8 +12,8 @@
 
 #import "Helper.h"
 #import "MasterViewController.h"
-
 #import "DetailViewController.h"
+#import "MBProgressHUD.h"
 
 //Simple Way to Identify Viewing State
 enum STATES {
@@ -43,6 +43,10 @@ enum STATES {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //Progress Wheel
+    HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:HUD];
+    //HUD.mode = MBProgressHUDModeAnnularDeterminate;
 	
     rowPressed = NO;
     //Initially Begin With Tag View
@@ -188,20 +192,21 @@ enum STATES {
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    //[_currentDataHelper tableView:self.tableView didSelectRowAtIndexPath:indexPath];
+- (void)loadTagsSelected {
     
-    rowPressed = YES;
-    NSString *FolderName = [_currentDataHelper nameForIndex:indexPath];
-    NSString *FolderID = [_currentDataHelper idForIndex:indexPath];
+//    float progress = 0.0;
+//    while (progress < 100.0) {
+//        progress += 0.01;
+//        HUD.progress = progress;
+//    }
+    
+    NSString *FolderName = [_currentDataHelper nameForIndex:globalIndex];
+    NSString *FolderID = [_currentDataHelper idForIndex:globalIndex];
     
     if (currentState == FOLDERSTATE) {
         
         [_BackButton setTitle:@"Back"];
         
-        
-        // _currentDataHelper.
         
         Helper *tempHelper = _currentDataHelper;
         [_previousHelpers insertObject:tempHelper atIndex:_previousHelpers.count];
@@ -211,14 +216,23 @@ enum STATES {
     else {
         _currentDataHelper = [[Helper alloc]init:FolderID :FolderName :currentState];
     }
-    
     [self.tableView reloadData];
-    
     [_detailViewController setImageURL:_currentDataHelper.imageURL];
     [_detailViewController setImageIDURL:_currentDataHelper.imageIDURLS];
     [_detailViewController setReal:_currentDataHelper.realURLS];
     [_detailViewController update];
     [_detailViewController removeDetail];
+    
+    
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //[_currentDataHelper tableView:self.tableView didSelectRowAtIndexPath:indexPath];
+    
+    rowPressed = YES;
+    globalIndex = indexPath;
+    [HUD showWhileExecuting:@selector(loadTagsSelected) onTarget:self withObject:nil animated:YES];
 }
 
 - (UIButton *) makeAccessoryButton: (NSString *) imageName

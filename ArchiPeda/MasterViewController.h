@@ -12,8 +12,13 @@
 
 @class DetailViewController;
 @class Helper;
+@class MBProgressHUD;
+
 @interface MasterViewController : UITableViewController{
     BOOL rowPressed;
+    
+    MBProgressHUD *HUD;
+    NSIndexPath *globalIndex;
     
 }
 
