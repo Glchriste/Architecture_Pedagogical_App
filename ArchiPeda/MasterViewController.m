@@ -108,12 +108,17 @@ enum STATES {
     
     if (cell == nil)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
     }
     cell.textLabel.text = @"          ";
     cell.textLabel.text = [cell.textLabel.text stringByAppendingString:[_currentDataHelper nameForIndex:indexPath]];
     UIFont *textFont = [UIFont boldSystemFontOfSize:20];
     cell.textLabel.textAlignment = NSTextAlignmentLeft;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"       %@", [_currentDataHelper numberOfImages:indexPath.row] ];
+    
+   
+
+    
     [cell.textLabel setFont:textFont];
     
     

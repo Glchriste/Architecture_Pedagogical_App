@@ -171,5 +171,21 @@ enum STATE {
 -(int)length{
     return _currentStateIDS.count;
 }
-
+-(NSString *)numberOfImages: (int) ID{
+    NSString *url;
+    if (_currentState == FOLDER) {
+        url = @"http://aswiftlytiltingplanet.net/senske/index.php?requestNum=15&ParentID=";
+        url = [url stringByAppendingFormat:@"%@", [_currentStateIDS objectAtIndex:ID]];
+    }
+    else {
+        url = @"http://aswiftlytiltingplanet.net/senske/index.php?requestNum=16&TagID=";
+        url = [url stringByAppendingFormat:@"%@", [_currentStateIDS objectAtIndex:ID]];
+    }
+    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+    url = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+    url = [url stringByReplacingOccurrencesOfString:@"[" withString:@""];
+    url = [url stringByReplacingOccurrencesOfString:@"]" withString:@""];
+    url = [url stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+    return url;
+}
 @end

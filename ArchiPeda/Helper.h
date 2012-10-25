@@ -49,4 +49,6 @@
 
 //The number of items in the current state
 -(int)length;
+
+-(NSString *)numberOfImages: (int)ID;
 @end

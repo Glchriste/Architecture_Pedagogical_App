@@ -25,6 +25,7 @@
 @property (nonatomic, retain) UIColor *lineColor;
 @property (readwrite) CGFloat lineWidth;
 @property (assign, nonatomic) BOOL empty;
+@property (nonatomic, retain) UIImage *drawingImage;
 
 
 

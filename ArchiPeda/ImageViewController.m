@@ -29,6 +29,8 @@
     
     //A loading view
     UIActivityIndicatorView * loadingView;
+    
+    float width, height;
 
 }
 @end
@@ -223,6 +225,8 @@
     }
     imageView = [self resize:image];
     [_imageScrollView addSubview:imageView];
+    width = imageView.frame.size.width;
+    height = imageView.frame.size.height;
     //CGAffineTransform rotate = CGAffineTransformMakeRotation( -90);
     //[_imageScrollView setTransform:rotate];
     
@@ -373,10 +377,12 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     Smooth_Line_ViewViewController *contr = [segue destinationViewController];
     UIImageView *view = [[_imageScrollView subviews]objectAtIndex:0];
-    UIImageView *copy = [[UIImageView alloc]initWithImage:view.image];
+    UIImageView *copy = [[UIImageView alloc]initWithFrame:view.frame];
+    [copy setImage:view.image];
+    [copy setFrame: CGRectMake(0, 0, width, height)];
+    [copy setCenter:self.view.center];
+    NSLog(@"%f, %f", width, height);
     
-    [copy setBounds: _imageScrollView.bounds];
-    [copy setFrame: _imageScrollView.frame];
     [contr setImageView:copy];
 }
 
