@@ -80,8 +80,7 @@ enum GridStates{
     [_selectedImages removeAllObjects];
     [self.tableView reloadData];
     
-    
-//    [self presentModalViewController:controller animated:YES];
+    [self presentViewController:controller animated:YES completion:nil];
 }
 
 
@@ -130,7 +129,7 @@ enum GridStates{
     }
     //Todo: Implement error handling for if it doesn't or can't send...
     
-//    [self dismissModalViewControllerAnimated:YES];
+   [self dismissViewControllerAnimated:controller completion:nil];
 }
 
 - (void)viewDidLoad

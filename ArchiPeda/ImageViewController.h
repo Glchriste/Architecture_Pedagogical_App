@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <MessageUI/MFMailComposeViewController.h>
+#import <MessageUI/MessageUI.h> 
 #import "DetailViewController.h"
+
+@class MBProgressHUD;
 
 @interface ImageViewController : UIViewController <UIScrollViewDelegate, SDWebImageManagerDelegate, UISplitViewControllerDelegate, UIAlertViewDelegate, MFMailComposeViewControllerDelegate, UINavigationControllerDelegate >
 {
@@ -17,6 +20,10 @@
     CGPoint previousPoint;
     NSMutableArray *drawnPoints;
     UIImage *cleanImage;
+    
+    
+    //Loading Wheel
+    MBProgressHUD *HUD;
 }
 //@property (strong, nonatomic) DrawingViewController *drawingView;
 
@@ -45,8 +52,5 @@
 - (void)configureView;
 -(IBAction)sendEmail;
 
-//Drawing methods:
 
-//Draw a line to an image and return the resulting image.
-- (UIImage *)drawLineFromPoint:(CGPoint)fromPoint toPoint:(CGPoint)toPoint image:(UIImage *)image;
 @end

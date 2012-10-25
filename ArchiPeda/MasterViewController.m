@@ -43,10 +43,9 @@ enum STATES {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //Progress Wheel
-    HUD = [[MBProgressHUD alloc] initWithView:self.view];
-    [self.view addSubview:HUD];
-    //HUD.mode = MBProgressHUDModeAnnularDeterminate;
+    
+
+    
 	
     rowPressed = NO;
     //Initially Begin With Tag View
@@ -61,6 +60,10 @@ enum STATES {
     
     self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
     
+    //Progress Wheel
+    HUD = [[MBProgressHUD alloc] initWithView:self.detailViewController.view];
+    [self.detailViewController.view addSubview:HUD];
+    //HUD.mode = MBProgressHUDModeAnnularDeterminate;
     
     //Gives Images to the Grid View
     [_detailViewController setImageURL:_currentDataHelper.imageURL];
@@ -193,12 +196,7 @@ enum STATES {
 }
 
 - (void)loadTagsSelected {
-    
-//    float progress = 0.0;
-//    while (progress < 100.0) {
-//        progress += 0.01;
-//        HUD.progress = progress;
-//    }
+
     
     NSString *FolderName = [_currentDataHelper nameForIndex:globalIndex];
     NSString *FolderID = [_currentDataHelper idForIndex:globalIndex];
@@ -228,11 +226,40 @@ enum STATES {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //[_currentDataHelper tableView:self.tableView didSelectRowAtIndexPath:indexPath];
-    
+
     rowPressed = YES;
     globalIndex = indexPath;
-    [HUD showWhileExecuting:@selector(loadTagsSelected) onTarget:self withObject:nil animated:YES];
+    
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.01 * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+
+        //Return to grid view if on a close up.
+        if([_detailViewController.navigationController.topViewController.title isEqualToString:@"Close Up"])
+        {
+            [_detailViewController.navigationController popViewControllerAnimated:YES];
+        }
+        
+    });
+    
+    //Load Tags On Selection
+    if([_detailViewController.navigationController.topViewController.title isEqualToString:@"Close Up"])
+    {
+        [MBProgressHUD showHUDAddedTo:_detailViewController.navigationController.topViewController.view animated:YES];
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [self loadTagsSelected];
+            
+            [MBProgressHUD hideHUDForView:_detailViewController.navigationController.topViewController.view animated:YES];
+        });
+    }
+    else {
+        [MBProgressHUD showHUDAddedTo:self.detailViewController.view animated:YES];
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [self loadTagsSelected];
+            
+            [MBProgressHUD hideHUDForView:self.detailViewController.view animated:YES];
+        });
+    }
+
 }
 
 - (UIButton *) makeAccessoryButton: (NSString *) imageName

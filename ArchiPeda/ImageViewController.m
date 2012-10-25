@@ -7,13 +7,13 @@
 //
 
 #import "ImageViewController.h"
-
+#import "Smooth_Line_ViewViewController.h"
+#import "MBProgressHUD.h"
 #define SAVEDIMAGES @"SaveData"
 
 @interface ImageViewController (){
     //Signals if the user has slid the image to the point where it should change
     bool changingImage;
-    
     //The view that holds the image
     UIImageView *imageView;
     UIImageView *previousImageView;
@@ -29,8 +29,7 @@
     
     //A loading view
     UIActivityIndicatorView * loadingView;
-    
-    //DrawingViewController *drawController;
+
 }
 @end
 
@@ -42,41 +41,15 @@
 @synthesize handleSubMaster = _handleSubMaster;
 @synthesize currentNumber = _currentNumber;
 @synthesize paletteButton = _paletteButton;
-//@synthesize drawingView = _drawingView;
 
 #pragma mark - Managing the detail item
 
-//Calls the trace paper animation and transitions to the drawing view controller.
--(IBAction)palettePressed:(id)sender {
-    //_drawingView = [[DrawingViewController alloc] init];
+-(void)viewWillAppear:(BOOL)animated {
     
-    //[self prepareForSegue:@"drawingViewSegue" sender:sender];
-    [self performSegueWithIdentifier:@"drawingViewSegue" sender:sender];
-    
-    
-    //The Trace Paper Animation and the Segue Trigger
-    //    [UIView transitionFromView:self.view
-    //                        toView:nil
-    //                      duration:2.0
-    //                       options:UIViewAnimationOptionTransitionCurlDown
-    //                    completion:^(BOOL finished) { [UIView animateWithDuration:0.5
-    //                                                                   animations:^{self.view.alpha = 0.5;}
-    //                                                                   completion:^(BOOL finished){ [self performSegueWithIdentifier:@"drawingViewSegue" sender:sender]; NSLog(@"Animation done.");  }]; }
-    //                    ];
 }
-//-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-//    UIViewController *dest = [segue destinationViewController];
-//    DrawingViewController *destDraw = (DrawingViewController *)dest;
-//    UIImageView *newView = [[UIImageView alloc]initWithImage:imageView.image];
-//    [newView setCenter:imageView.center];
-//    [destDraw setImageLayer:newView];
-//    
-//    
-//    //[destDraw setImageLayer:imageView];
-//}
+
 
 -(void)prepareSideImages{
-    NSLog(@"%s, %i", __PRETTY_FUNCTION__, _currentNumber);
     int previousImageTag;
     int nextImageTag;
     if (_currentNumber == _handleSubMaster.imageStrings.count -2) {
@@ -95,16 +68,15 @@
     NSURL *nextImageURL = [_handleSubMaster.realURLS objectAtIndex:nextImageTag];
     
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        //If it's cached then load from file
+        //If it's cached then load from file for left image
         if ([cachedDictionary objectForKey:previousImageURL] != nil) {
             
             //Keep Original and Resize a Copy
             UIImage *theImage = [cachedDictionary objectForKey:previousImageURL];
-            UIImage *sizedImage = [self resize:theImage];
             
-            previousImageView = [[UIImageView alloc]initWithImage:sizedImage];
+            previousImageView = [self resize:theImage];
             [previousImageView setTag:previousImageTag];
-            [previousImageView sizeToFit];
+            //[previousImageView sizeToFit];
         }
         else {
             
@@ -122,16 +94,16 @@
                                            NSLog(@"FAiled Prev");
                                        }];
         }
-        //If it's cached then load from file
+        //If it's cached then load from file for right Image
         if ([cachedDictionary objectForKey:nextImageURL] != nil) {
             
             //Keep Original and Resize a Copy
             UIImage *theImage = [cachedDictionary objectForKey:nextImageURL];
-            UIImage *sizedImage = [self resize:theImage];
             
-            nextImageView = [[UIImageView alloc]initWithImage:sizedImage];
+            
+            nextImageView = [self resize:theImage];
             [nextImageView setTag:nextImageTag];
-            [nextImageView sizeToFit];
+            //[nextImageView sizeToFit];
         }
         else {
             
@@ -151,17 +123,16 @@
         }
         
         dispatch_async( dispatch_get_main_queue(), ^{
-            NSLog(@"Finished Loading");
+
         });
     });
     
-}
+}//End of prepare side images
 
 -(void)store: (UIImage *)image inView:(int)view forURL:(NSURL *)url{
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    UIImage *sizedImage = [self resize:image];
-    UIImageView *theView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, sizedImage.size.width, sizedImage.size.height)];
-    [theView setImage:sizedImage];
+    //First instance of being resized 
+    UIImageView *theView = [self resize:image];
+    
     if (view == 0) {
         int tag = previousImageView.tag;
         previousImageView = theView;
@@ -175,6 +146,7 @@
     
     @try {
         [cachedDictionary setObject:image forKey:url];
+        NSLog(@"Cached Image");
     }
     @catch (NSException *exception) {
         NSLog(@"Could not cache image");
@@ -184,30 +156,21 @@
     }
 }
 
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
-{
-    return imageView;
-}
+
 - (void)setImageURL:(NSString *)imageURL
 {
     if (_imageURL != imageURL)
     {
         _imageURL = imageURL;
-        // [self configureView];
     }
 }
 
-
 - (void)configureView
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     [self prepareSideImages];
     if (self.imageURL)
     {
-        //        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(LongPress:)];
-        //  [self.view addGestureRecognizer:longPress];
-        
-        
+
         [self startLoaderAnimation];
         [self setTitle:@"Close Up"];
         [_imageScrollView setAlpha:0];
@@ -223,10 +186,8 @@
             
             //Keep Original and Resize a Copy
             UIImage *theImage = [cachedDictionary objectForKey:self.imageURL];
-            UIImage *sizedImage = [self resize:theImage];
             
-            imageView = [[UIImageView alloc]initWithImage:sizedImage];
-            [imageView sizeToFit];
+            imageView = [self resize:theImage];
             _imageScrollView.contentSize = theImage.size;
             [loadingView removeFromSuperview];
             [_imageScrollView addSubview:imageView];
@@ -255,16 +216,15 @@
     }
 }
 
-
 -(void)fixScroll{
     UIImage *image = imageView.image;
-    UIImage *sizedImage = [self resize:image];
     for (UIView* view in [imageView subviews]) {
         [view removeFromSuperview];
     }
-    imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, sizedImage.size.width, sizedImage.size.height)];
-    [imageView setImage:sizedImage];
+    imageView = [self resize:image];
     [_imageScrollView addSubview:imageView];
+    //CGAffineTransform rotate = CGAffineTransformMakeRotation( -90);
+    //[_imageScrollView setTransform:rotate];
     
     @try {
         [cachedDictionary setObject:image forKey:self.imageURL];
@@ -275,7 +235,12 @@
     @finally {
         
     }
-    [_imageScrollView setContentSize:sizedImage.size];
+    [_imageScrollView setContentSize:imageView.image.size];
+    [_imageScrollView setCenter:self.view.center];
+    
+    if (imageView.image.size.height > imageView.image.size.width) {
+        NSLog(@"Should be vertical");
+    }
     
     [imageView setCenter:self.view.center];
     NSTimeInterval time = .5;
@@ -283,6 +248,44 @@
         [_imageScrollView setAlpha:1.0];
     }];
     [loadingView removeFromSuperview];
+}
+
+-(UIImageView *)resize: (UIImage*)image{
+    UIImageView *returnView;
+    _imageSize = image.size;
+    float originalWidth = image.size.width;
+    float originalHeight = image.size.height;
+    NSLog(@"%f, %f", originalHeight, originalWidth);
+    float wScale = originalWidth/703;
+    float hScale = originalHeight/660;
+    
+    if (originalWidth > 703 || originalHeight > 660) {
+        if (hScale > wScale) {
+            image = [UIImage imageWithCGImage:image.CGImage scale:hScale orientation:image.imageOrientation];
+            returnView = [[UIImageView alloc]initWithImage:image];
+            //CGAffineTransform rotate = CGAffineTransformMakeRotation(90);
+            //[returnView setTransform:rotate];
+            NSLog(@"Should Rotate");
+            
+        }
+        else {
+            image = [UIImage imageWithCGImage:image.CGImage scale:wScale orientation:image.imageOrientation];
+            returnView = [[UIImageView alloc]initWithImage:image];
+        }
+    }
+    else
+        returnView = [[UIImageView alloc]initWithImage:image];
+    return returnView;
+}
+
+#pragma mark Mail
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
+{
+    if (result == MFMailComposeResultSent) {
+        NSLog(@"It's away!");
+    }
+     //Todo: Implement error handling for if it doesn't or can't send...
+    [self dismissViewControllerAnimated:controller completion:nil];
 }
 
 -(IBAction)sendEmail {
@@ -297,77 +300,97 @@
     
     [controller setMessageBody:urlsmail isHTML:NO];
     
+    [self presentViewController:controller animated:YES completion:nil];
     
-   // [self presentModalViewController:controller animated:YES];
 }
+#pragma mark viewDidLoad
 
-- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
-{
-    if (result == MFMailComposeResultSent) {
-        NSLog(@"It's away!");
-    }
-   // [self dismissModalViewControllerAnimated:YES];
-}
-
-
--(UIImage *)resize: (UIImage*)image{
-    _imageSize = image.size;
-    float originalWidth = image.size.width;
-    float originalHeight = image.size.height;
+-(void)progress {
     
-    float wScale = originalWidth/703;
-    float hScale = originalHeight/660;
-    
-    if (originalWidth > 703 || originalHeight > 660) {
-        if (hScale > wScale) {
-            image = [UIImage imageWithCGImage:image.CGImage scale:hScale orientation:image.imageOrientation];
+        float progress = 0.0;
+        while (progress < 100.0) {
+            progress += 0.01;
+            HUD.progress = progress;
         }
-        else {
-            image = [UIImage imageWithCGImage:image.CGImage scale:wScale orientation:image.imageOrientation];
-        }
-    }
-    return image;
 }
-
-
-
--(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    //Test for orientation changes.
-    
-}
-
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    
-    cachedImages = [[NSMutableSet alloc]initWithCapacity:10];
-    cachedDictionary = [[NSMutableDictionary alloc]initWithCapacity:10];
-    
-    [self configureView];
     _imageScrollView.minimumZoomScale=1;
     _imageScrollView.maximumZoomScale=10.0;
     [_imageScrollView setDelegate:self];
     changingImage = false;
+    
+    //Progress Wheel
+    HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    //HUD.mode = MBProgressHUDModeAnnularDeterminate;
+    [self.view addSubview:HUD];
+
+//    [MBProgressHUD showHUDAddedTo:[self.view.subviews objectAtIndex:0] animated:YES];
+//    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+//        // Do something...
+//        [self progress];
+////        [HUD showWhileExecuting:@selector(progress) onTarget:self withObject:nil animated:YES];
+//        
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [MBProgressHUD hideHUDForView:self.view animated:YES];
+//        });
+//    });
+
+    
+    cachedImages = [[NSMutableSet alloc]initWithCapacity:10];
+    cachedDictionary = [[NSMutableDictionary alloc]initWithCapacity:10];
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.01 * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self configureView];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    });
+
+ 
+
     self.view.backgroundColor = [UIColor blackColor];
     
     
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(drag:)];
-    
     [self.view addGestureRecognizer:pan];
-    
     UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(zoom:)];
     [doubleTap setNumberOfTapsRequired:2];
     [self.view addGestureRecognizer:doubleTap];
 }
+
+#pragma mark User Interactions
+
+//Calls the trace paper animation and transitions to the drawing view controller.
+-(IBAction)palettePressed:(id)sender {
+    
+    [self performSegueWithIdentifier:@"drawingViewSegue" sender:sender];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    Smooth_Line_ViewViewController *contr = [segue destinationViewController];
+    UIImageView *view = [[_imageScrollView subviews]objectAtIndex:0];
+    UIImageView *copy = [[UIImageView alloc]initWithImage:view.image];
+    
+    [copy setBounds: _imageScrollView.bounds];
+    [copy setFrame: _imageScrollView.frame];
+    [contr setImageView:copy];
+}
+
 -(void)zoom: (UITapGestureRecognizer *)tap{
     [self.imageScrollView setZoomScale:_imageScrollView.minimumZoomScale];
 }
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
+    return imageView;
+}
+
 -(void)drag: (UIPanGestureRecognizer *)recognizer{
     if (recognizer.state == UIGestureRecognizerStateBegan) {
-        NSLog(@"Trying to drag");
+        //NSLog(@"Trying to drag");
         [previousImageView setBackgroundColor:[UIColor whiteColor]];
         [nextImageView setBackgroundColor:[UIColor whiteColor]];
         
@@ -440,7 +463,7 @@
             }];
         }
         if (!changing) {
-            NSLog(@"Not Changing");
+            //NSLog(@"Not Changing");
             [imageView setCenter:self.view.center];
             [previousImageView removeFromSuperview];
             [nextImageView removeFromSuperview];
@@ -503,18 +526,6 @@
 
 
 
-////Prepare for segue to drawing board / view.
-//-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-//    DrawingViewController *drawVC = [segue destinationViewController];
-//    drawVC.imageView = imageView;
-//    _drawingView = drawVC;
-//
-//    SharedSingleton *shared = [SharedSingleton sharedSingleton];
-//    [shared setCurrentImageView:imageView];
-//
-//
-//}
-
 
 /**
  * Called repeatedly while the image is downloading when [SDWebImageDownloader progressive] is enabled.
@@ -523,8 +534,7 @@
  * @param image The partial image representing the currently download portion of the image
  */
 - (void)imageDownloader:(SDWebImageDownloader *)downloader didUpdatePartialImage:(UIImage *)image{
-    
-    
+
 }
 
 /**
@@ -548,6 +558,8 @@
     
 }
 
+
+
 -(BOOL)splitViewController:(UISplitViewController *)svc shouldHideViewController:(UIViewController *)vc inOrientation:(UIInterfaceOrientation)orientation{
     if (UIDeviceOrientationIsLandscape(orientation)) {
         return YES;
@@ -564,24 +576,7 @@
     [self.view addSubview:loadingView];
 }
 
-//-(void)LongPress:(UIGestureRecognizer *)recognizer{
-//    NSLog(@"Pressed");
-//    if (recognizer.state == UIGestureRecognizerStateBegan) {
-//        MFMailComposeViewController *controller = [[MFMailComposeViewController alloc]init];
-//        controller.mailComposeDelegate = self;
-//        [controller setSubject:@"Check out these images"];
-//        [controller setMessageBody:_imageURL isHTML:NO];
-//        [self presentModalViewController:controller animated:YES];
-//    }
-//}
 
-//- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
-//{
-//    if (result == MFMailComposeResultSent) {
-//        NSLog(@"It's away!");
-//    }
-//    [self dismissModalViewControllerAnimated:YES];
-//}
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
     [imageView setCenter:self.view.center];
 }

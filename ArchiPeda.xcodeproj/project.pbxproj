@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		213967111636D332003EE545 /* Smooth_Line_ViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2139670E1636D332003EE545 /* Smooth_Line_ViewViewController.m */; };
+		213967121636D332003EE545 /* SmoothLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 213967101636D332003EE545 /* SmoothLineView.m */; };
 		215E5D781629E243009AA1A3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 215E5D771629E243009AA1A3 /* UIKit.framework */; };
 		215E5D7A1629E243009AA1A3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 215E5D791629E243009AA1A3 /* Foundation.framework */; };
 		215E5D7C1629E243009AA1A3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 215E5D7B1629E243009AA1A3 /* CoreGraphics.framework */; };
@@ -64,6 +66,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2139670D1636D332003EE545 /* Smooth_Line_ViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Smooth_Line_ViewViewController.h; sourceTree = "<group>"; };
+		2139670E1636D332003EE545 /* Smooth_Line_ViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Smooth_Line_ViewViewController.m; sourceTree = "<group>"; };
+		2139670F1636D332003EE545 /* SmoothLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmoothLineView.h; sourceTree = "<group>"; };
+		213967101636D332003EE545 /* SmoothLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmoothLineView.m; sourceTree = "<group>"; };
 		215E5D731629E243009AA1A3 /* ArchiPeda.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArchiPeda.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		215E5D771629E243009AA1A3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		215E5D791629E243009AA1A3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -115,18 +121,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		21405AA116309450001E630A /* ImportFromReal */ = {
+		2139670B1636D272003EE545 /* Grid */ = {
 			isa = PBXGroup;
 			children = (
+				215E5D951629E243009AA1A3 /* DetailViewController.h */,
+				215E5D961629E243009AA1A3 /* DetailViewController.m */,
 			);
-			name = ImportFromReal;
+			name = Grid;
+			sourceTree = "<group>";
+		};
+		2139670C1636D27A003EE545 /* Image  */ = {
+			isa = PBXGroup;
+			children = (
+				21BCF957162B2FF700E8AA1C /* ImageViewController.h */,
+				21BCF958162B2FF700E8AA1C /* ImageViewController.m */,
+			);
+			name = "Image ";
+			sourceTree = "<group>";
+		};
+		21405AA116309450001E630A /* Draw */ = {
+			isa = PBXGroup;
+			children = (
+				2139670D1636D332003EE545 /* Smooth_Line_ViewViewController.h */,
+				2139670E1636D332003EE545 /* Smooth_Line_ViewViewController.m */,
+				2139670F1636D332003EE545 /* SmoothLineView.h */,
+				213967101636D332003EE545 /* SmoothLineView.m */,
+			);
+			name = Draw;
 			sourceTree = "<group>";
 		};
 		215E5D681629E243009AA1A3 = {
 			isa = PBXGroup;
 			children = (
-				21BCF94A162B22CD00E8AA1C /* MessageUI.framework */,
-				21BCF948162B21BF00E8AA1C /* ImageIO.framework */,
 				21BCF936162B217D00E8AA1C /* SDWebImage.xcodeproj */,
 				215E5D7D1629E243009AA1A3 /* ArchiPeda */,
 				215E5D761629E243009AA1A3 /* Frameworks */,
@@ -145,6 +171,8 @@
 		215E5D761629E243009AA1A3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				21BCF94A162B22CD00E8AA1C /* MessageUI.framework */,
+				21BCF948162B21BF00E8AA1C /* ImageIO.framework */,
 				215E5D771629E243009AA1A3 /* UIKit.framework */,
 				215E5D791629E243009AA1A3 /* Foundation.framework */,
 				215E5D7B1629E243009AA1A3 /* CoreGraphics.framework */,
@@ -161,11 +189,9 @@
 				215E5D8F1629E243009AA1A3 /* MainStoryboard.storyboard */,
 				21BCF956162B2E7000E8AA1C /* Art */,
 				21BCF92E162B0AD800E8AA1C /* Navigation */,
-				215E5D951629E243009AA1A3 /* DetailViewController.h */,
-				215E5D961629E243009AA1A3 /* DetailViewController.m */,
-				21BCF957162B2FF700E8AA1C /* ImageViewController.h */,
-				21BCF958162B2FF700E8AA1C /* ImageViewController.m */,
-				21405AA116309450001E630A /* ImportFromReal */,
+				2139670B1636D272003EE545 /* Grid */,
+				2139670C1636D27A003EE545 /* Image  */,
+				21405AA116309450001E630A /* Draw */,
 				215E5D7E1629E243009AA1A3 /* Supporting Files */,
 			);
 			path = ArchiPeda;
@@ -336,6 +362,8 @@
 				21BCF935162B0D4D00E8AA1C /* Helper.m in Sources */,
 				21BCF959162B2FF700E8AA1C /* ImageViewController.m in Sources */,
 				F54EBFD01630850400606468 /* MBProgressHUD.m in Sources */,
+				213967111636D332003EE545 /* Smooth_Line_ViewViewController.m in Sources */,
+				213967121636D332003EE545 /* SmoothLineView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
