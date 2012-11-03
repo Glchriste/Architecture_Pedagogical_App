@@ -84,40 +84,6 @@ enum GridStates{
 }
 
 
-//The old long press gesture for sending email that currently isn't being used.
-
-//-(void)LongPress:(UIGestureRecognizer *)recognizer{
-//    NSLog(@"Pressed");
-//    if (recognizer.state == UIGestureRecognizerStateBegan) {
-//        controller = [[MFMailComposeViewController alloc]init];
-//
-//
-//        controller.mailComposeDelegate = self;
-//
-//
-//        [controller setSubject:@"Check out these images"];
-//        NSString *urlsmail = @"";
-//
-//        for (NSNumber *num in _selectedImages) {
-//            int number = num.intValue;
-//            NSString *imageName = [_realURLS objectAtIndex:number];
-//            urlsmail = [[urlsmail stringByAppendingString:imageName]stringByAppendingString:@"\n"];
-//        }
-//
-//        [controller setMessageBody:urlsmail isHTML:NO];
-//        [_selectedImages removeAllObjects];
-//        [self.tableView reloadData];
-//
-//
-//        [self presentModalViewController:controller animated:YES];
-//
-//    }
-
-
-
-//}
-
-
 #pragma mark - Compose Mail Controller
 
 //The "compose mail" controller. Used for sending mail.
@@ -129,7 +95,7 @@ enum GridStates{
     }
     //Todo: Implement error handling for if it doesn't or can't send...
     
-   [self dismissViewControllerAnimated:controller completion:nil];
+   [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 - (void)viewDidLoad
@@ -247,6 +213,7 @@ enum GridStates{
         
         //Set the border color and width of the thumbnails.
         [thumbView.layer setBorderColor: [[UIColor whiteColor] CGColor]];
+        //[thumbView.layer setBorderColor: [[UIColor clearColor] CGColor]];
         [thumbView.layer setBorderWidth: 1.0];
         
         //If an image is selected, make the border color to be red and the width 3x greater.
@@ -296,6 +263,7 @@ enum GridStates{
         [thumbView setImageWithURL:tempURL placeholderImage:[UIImage imageNamed:@"placeholder.jpeg"]];
         
         [thumbView.layer setBorderColor: [[UIColor whiteColor] CGColor]];
+        //[thumbView.layer setBorderColor: [[UIColor clearColor] CGColor]];
         [thumbView.layer setBorderWidth: 1.0];
         
         for (NSNumber *num in _selectedImages) {
@@ -342,6 +310,7 @@ enum GridStates{
         [thumbView setImageWithURL:tempURL placeholderImage:[UIImage imageNamed:@"placeholder.jpeg"]];
         
         [thumbView.layer setBorderColor: [[UIColor whiteColor] CGColor]];
+        //[thumbView.layer setBorderColor: [[UIColor clearColor] CGColor]];
         [thumbView.layer setBorderWidth: 1.0];
         
         for (NSNumber *num in _selectedImages) {
@@ -462,6 +431,8 @@ enum GridStates{
     url = [url stringByReplacingOccurrencesOfString:@"]" withString:@""];
     url = [url stringByReplacingOccurrencesOfString:@"\"" withString:@""];
     _imageIDs = [url componentsSeparatedByString:@","];
+    
+    NSLog(@"%@",[_imageIDs objectAtIndex:0]);
     
     data = [NSData dataWithContentsOfURL:_real];
     url = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];

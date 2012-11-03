@@ -26,9 +26,11 @@
     MBProgressHUD *HUD;
 }
 //@property (strong, nonatomic) DrawingViewController *drawingView;
+//@property (strong, nonatomic) IBOutlet UIView *view;
 
 //The imageScrollView is required for image zooming
 @property (weak, nonatomic) IBOutlet UIScrollView *imageScrollView;
+- (IBAction)showTags:(id)sender;
 
 //imageURL stores the current image being displayed url
 @property (strong, nonatomic) NSString *imageURL;

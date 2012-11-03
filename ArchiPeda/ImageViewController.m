@@ -66,8 +66,8 @@
     else {
         previousImageTag = _currentNumber - 1;
     }
-    NSURL *previousImageURL = [_handleSubMaster.realURLS objectAtIndex:previousImageTag];
-    NSURL *nextImageURL = [_handleSubMaster.realURLS objectAtIndex:nextImageTag];
+        NSURL *previousImageURL = [_handleSubMaster.realURLS objectAtIndex:previousImageTag];
+        NSURL *nextImageURL = [_handleSubMaster.realURLS objectAtIndex:nextImageTag];
     
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         //If it's cached then load from file for left image
@@ -158,18 +158,13 @@
     }
 }
 
-
-- (void)setImageURL:(NSString *)imageURL
-{
-    if (_imageURL != imageURL)
-    {
-        _imageURL = imageURL;
-    }
-}
-
 - (void)configureView
 {
-    [self prepareSideImages];
+    if(previousImageView.image == NULL  && nextImageView.image == NULL)
+    {
+        //Put in background thread
+        [self prepareSideImages];
+    }
     if (self.imageURL)
     {
 
@@ -227,8 +222,6 @@
     [_imageScrollView addSubview:imageView];
     width = imageView.frame.size.width;
     height = imageView.frame.size.height;
-    //CGAffineTransform rotate = CGAffineTransformMakeRotation( -90);
-    //[_imageScrollView setTransform:rotate];
     
     @try {
         [cachedDictionary setObject:image forKey:self.imageURL];
@@ -267,10 +260,6 @@
         if (hScale > wScale) {
             image = [UIImage imageWithCGImage:image.CGImage scale:hScale orientation:image.imageOrientation];
             returnView = [[UIImageView alloc]initWithImage:image];
-            //CGAffineTransform rotate = CGAffineTransformMakeRotation(90);
-            //[returnView setTransform:rotate];
-            NSLog(@"Should Rotate");
-            
         }
         else {
             image = [UIImage imageWithCGImage:image.CGImage scale:wScale orientation:image.imageOrientation];
@@ -289,7 +278,7 @@
         NSLog(@"It's away!");
     }
      //Todo: Implement error handling for if it doesn't or can't send...
-    [self dismissViewControllerAnimated:controller completion:nil];
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 -(IBAction)sendEmail {
@@ -321,6 +310,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //Set background image.
+    //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"wood1.jpeg"]];
+    //self.navigationController.navigationBar.tintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"wood1.jpeg"]];
+    //self.navigationController.toolbar.tintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"wood1.jpeg"]];
     
     _imageScrollView.minimumZoomScale=1;
     _imageScrollView.maximumZoomScale=10.0;
@@ -356,7 +349,7 @@
 
  
 
-    self.view.backgroundColor = [UIColor blackColor];
+    //self.view.backgroundColor = [UIColor blackColor];
     
     
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(drag:)];
@@ -376,7 +369,8 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     Smooth_Line_ViewViewController *contr = [segue destinationViewController];
-    UIImageView *view = [[_imageScrollView subviews]objectAtIndex:0];
+    //UIImageView *view = [[_imageScrollView subviews]objectAtIndex:0];
+    UIImageView *view = imageView;
     UIImageView *copy = [[UIImageView alloc]initWithFrame:view.frame];
     [copy setImage:view.image];
     [copy setFrame: CGRectMake(0, 0, width, height)];
@@ -396,11 +390,10 @@
 
 -(void)drag: (UIPanGestureRecognizer *)recognizer{
     if (recognizer.state == UIGestureRecognizerStateBegan) {
-        //NSLog(@"Trying to drag");
+
         [previousImageView setBackgroundColor:[UIColor whiteColor]];
         [nextImageView setBackgroundColor:[UIColor whiteColor]];
-        
-        //[_imageScrollView removeFromSuperview];
+
         [previousImageView setCenter:CGPointMake(imageView.center.x - imageView.bounds.size.width/2 - previousImageView.bounds.size.width/2, imageView.center.y)];
         
         [nextImageView setCenter:CGPointMake(imageView.center.x + imageView.bounds.size.width/2 + nextImageView.bounds.size.width/2, imageView.center.y)];
@@ -587,4 +580,7 @@
     [imageView setCenter:self.view.center];
 }
 
+- (IBAction)showTags:(id)sender {
+     NSString *url = @"http://aswiftlytiltingplanet.net/senske/index.php?requestNum=15&ParentID=";
+}
 @end

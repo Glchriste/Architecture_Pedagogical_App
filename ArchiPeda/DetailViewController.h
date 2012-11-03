@@ -24,7 +24,7 @@
 
 - (IBAction)selectMultiple:(id)sender;
 - (IBAction)selectSingle:(id)sender;
-- (IBAction)sendEmail:(id)sender;
+//- (IBAction)sendEmail:(id)sender;
 
 -(void)removeDetail;
 -(void)update;

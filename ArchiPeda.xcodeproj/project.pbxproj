@@ -32,6 +32,19 @@
 		21BCF955162B2E6B00E8AA1C /* FolderRightArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 21BCF950162B2E6B00E8AA1C /* FolderRightArrow.png */; };
 		21BCF959162B2FF700E8AA1C /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BCF958162B2FF700E8AA1C /* ImageViewController.m */; };
 		F54EBFD01630850400606468 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F54EBFCF1630850400606468 /* MBProgressHUD.m */; };
+		F5A72F2D1640A3070083DFAF /* archicon.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A72F2C1640A3070083DFAF /* archicon.png */; };
+		F5A72F2F1640A3370083DFAF /* archicon2.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A72F2E1640A3370083DFAF /* archicon2.png */; };
+		F5A72F311640A82A0083DFAF /* wood1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F5A72F301640A82A0083DFAF /* wood1.jpeg */; };
+		F5A72F331640B7680083DFAF /* woodpattern.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A72F321640B7680083DFAF /* woodpattern.png */; };
+		F5A72F351640B8EE0083DFAF /* woodpattern2.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A72F341640B8EE0083DFAF /* woodpattern2.png */; };
+		F5A72F371640B9880083DFAF /* woodpattern3.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A72F361640B9880083DFAF /* woodpattern3.png */; };
+		F5CE3C1D1641A1EE00A55BF1 /* rowselection.png in Resources */ = {isa = PBXBuildFile; fileRef = F5CE3C1C1641A1EE00A55BF1 /* rowselection.png */; };
+		F5CE3C1F1641A23500A55BF1 /* rowselection2.png in Resources */ = {isa = PBXBuildFile; fileRef = F5CE3C1E1641A23500A55BF1 /* rowselection2.png */; };
+		F5CE3C221641A4BA00A55BF1 /* rowselection3.png in Resources */ = {isa = PBXBuildFile; fileRef = F5CE3C201641A4BA00A55BF1 /* rowselection3.png */; };
+		F5CE3C231641A4BA00A55BF1 /* rowselection4.png in Resources */ = {isa = PBXBuildFile; fileRef = F5CE3C211641A4BA00A55BF1 /* rowselection4.png */; };
+		F5CE3C261641A79D00A55BF1 /* rowselection5.png in Resources */ = {isa = PBXBuildFile; fileRef = F5CE3C241641A79D00A55BF1 /* rowselection5.png */; };
+		F5CE3C271641A79D00A55BF1 /* rowselection6.png in Resources */ = {isa = PBXBuildFile; fileRef = F5CE3C251641A79D00A55BF1 /* rowselection6.png */; };
+		F5CE3C29164225E500A55BF1 /* mahogany.png in Resources */ = {isa = PBXBuildFile; fileRef = F5CE3C28164225E400A55BF1 /* mahogany.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +115,19 @@
 		21BCF958162B2FF700E8AA1C /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
 		F54EBFCE1630850400606468 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		F54EBFCF1630850400606468 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		F5A72F2C1640A3070083DFAF /* archicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = archicon.png; path = ../archicon.png; sourceTree = "<group>"; };
+		F5A72F2E1640A3370083DFAF /* archicon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = archicon2.png; path = ../archicon2.png; sourceTree = "<group>"; };
+		F5A72F301640A82A0083DFAF /* wood1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = wood1.jpeg; path = ../wood1.jpeg; sourceTree = "<group>"; };
+		F5A72F321640B7680083DFAF /* woodpattern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = woodpattern.png; path = ../woodpattern.png; sourceTree = "<group>"; };
+		F5A72F341640B8EE0083DFAF /* woodpattern2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = woodpattern2.png; path = ../woodpattern2.png; sourceTree = "<group>"; };
+		F5A72F361640B9880083DFAF /* woodpattern3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = woodpattern3.png; path = ../woodpattern3.png; sourceTree = "<group>"; };
+		F5CE3C1C1641A1EE00A55BF1 /* rowselection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rowselection.png; sourceTree = "<group>"; };
+		F5CE3C1E1641A23500A55BF1 /* rowselection2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rowselection2.png; sourceTree = "<group>"; };
+		F5CE3C201641A4BA00A55BF1 /* rowselection3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rowselection3.png; sourceTree = "<group>"; };
+		F5CE3C211641A4BA00A55BF1 /* rowselection4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rowselection4.png; sourceTree = "<group>"; };
+		F5CE3C241641A79D00A55BF1 /* rowselection5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rowselection5.png; sourceTree = "<group>"; };
+		F5CE3C251641A79D00A55BF1 /* rowselection6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rowselection6.png; sourceTree = "<group>"; };
+		F5CE3C28164225E400A55BF1 /* mahogany.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mahogany.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +261,19 @@
 		21BCF956162B2E7000E8AA1C /* Art */ = {
 			isa = PBXGroup;
 			children = (
+				F5CE3C28164225E400A55BF1 /* mahogany.png */,
+				F5CE3C241641A79D00A55BF1 /* rowselection5.png */,
+				F5CE3C251641A79D00A55BF1 /* rowselection6.png */,
+				F5CE3C201641A4BA00A55BF1 /* rowselection3.png */,
+				F5CE3C211641A4BA00A55BF1 /* rowselection4.png */,
+				F5CE3C1E1641A23500A55BF1 /* rowselection2.png */,
+				F5CE3C1C1641A1EE00A55BF1 /* rowselection.png */,
+				F5A72F361640B9880083DFAF /* woodpattern3.png */,
+				F5A72F341640B8EE0083DFAF /* woodpattern2.png */,
+				F5A72F321640B7680083DFAF /* woodpattern.png */,
+				F5A72F301640A82A0083DFAF /* wood1.jpeg */,
+				F5A72F2E1640A3370083DFAF /* archicon2.png */,
+				F5A72F2C1640A3070083DFAF /* archicon.png */,
 				21BCF94C162B2E6B00E8AA1C /* 15-tags.png */,
 				21BCF94D162B2E6B00E8AA1C /* 18-envelope.png */,
 				21BCF94E162B2E6B00E8AA1C /* 98-palette.png */,
@@ -345,6 +384,19 @@
 				21BCF953162B2E6B00E8AA1C /* 98-palette.png in Resources */,
 				21BCF954162B2E6B00E8AA1C /* FolderDownArrow.png in Resources */,
 				21BCF955162B2E6B00E8AA1C /* FolderRightArrow.png in Resources */,
+				F5A72F2D1640A3070083DFAF /* archicon.png in Resources */,
+				F5A72F2F1640A3370083DFAF /* archicon2.png in Resources */,
+				F5A72F311640A82A0083DFAF /* wood1.jpeg in Resources */,
+				F5A72F331640B7680083DFAF /* woodpattern.png in Resources */,
+				F5A72F351640B8EE0083DFAF /* woodpattern2.png in Resources */,
+				F5A72F371640B9880083DFAF /* woodpattern3.png in Resources */,
+				F5CE3C1D1641A1EE00A55BF1 /* rowselection.png in Resources */,
+				F5CE3C1F1641A23500A55BF1 /* rowselection2.png in Resources */,
+				F5CE3C221641A4BA00A55BF1 /* rowselection3.png in Resources */,
+				F5CE3C231641A4BA00A55BF1 /* rowselection4.png in Resources */,
+				F5CE3C261641A79D00A55BF1 /* rowselection5.png in Resources */,
+				F5CE3C271641A79D00A55BF1 /* rowselection6.png in Resources */,
+				F5CE3C29164225E500A55BF1 /* mahogany.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

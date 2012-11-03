@@ -12,7 +12,7 @@
 #import <MessageUI/MessageUI.h>
 
 
-@interface Smooth_Line_ViewViewController : UIViewController<UISplitViewControllerDelegate>
+@interface Smooth_Line_ViewViewController : UIViewController<UISplitViewControllerDelegate,MFMailComposeViewControllerDelegate>
 
 {
     MFMailComposeViewController* controller;
@@ -23,8 +23,8 @@
 @property (nonatomic, retain) UIImage *imageToSend;
 @property (strong, nonatomic) UIView *paperView;
 
-- (IBAction)popThis:(id)sender;
-- (IBAction)changeColor:(id)sender;
+//- (IBAction)popThis:(id)sender;
+//- (IBAction)changeColor:(id)sender;
 
 @end
 

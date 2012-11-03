@@ -37,7 +37,7 @@ enum STATE {
         url = [url stringByReplacingOccurrencesOfString:@"[" withString:@""];
         url = [url stringByReplacingOccurrencesOfString:@"]" withString:@""];
         url = [url stringByReplacingOccurrencesOfString:@"\"" withString:@""];
-        
+        url = [url stringByReplacingOccurrencesOfString:@"\\" withString:@""];
         _currentDirectoryContentsNames = [NSMutableArray arrayWithArray:[url componentsSeparatedByString:@","]];
         
         data = [NSData dataWithContentsOfURL:[NSURL URLWithString:BASETAGIDSURL]];
@@ -101,7 +101,7 @@ enum STATE {
             url = [url stringByReplacingOccurrencesOfString:@"[" withString:@""];
             url = [url stringByReplacingOccurrencesOfString:@"]" withString:@""];
             url = [url stringByReplacingOccurrencesOfString:@"\"" withString:@""];
-            
+            url = [url stringByReplacingOccurrencesOfString:@"\\" withString:@""];
             _currentDirectoryContentsNames = [NSMutableArray arrayWithArray:[url componentsSeparatedByString:@","]];
             
             data = [NSData dataWithContentsOfURL:[NSURL URLWithString:BASETAGIDSURL]];
@@ -145,6 +145,7 @@ enum STATE {
             url = [url stringByReplacingOccurrencesOfString:@"[" withString:@""];
             url = [url stringByReplacingOccurrencesOfString:@"]" withString:@""];
             url = [url stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+            url = [url stringByReplacingOccurrencesOfString:@"\\" withString:@""];
             _currentDirectoryContentsNames =  [NSMutableArray arrayWithArray:[url componentsSeparatedByString:@","]];;
             
             url = @"http://aswiftlytiltingplanet.net/senske/index.php?requestNum=3&FolderID=";
